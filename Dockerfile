@@ -1,10 +1,6 @@
-FROM docker/dev-environments-default:stable-1
+FROM redhat/ubi8-minimal
 
-RUN apt-get update && apt-get upgrade -y
+RUN rpm --import https://yum.corretto.aws/corretto.key && \
+  curl -L -o /etc/yum.repos.d/corretto.repo https://yum.corretto.aws/corretto.repo
 
-RUN apt-get install -y software-properties-common
-RUN wget -O- https://apt.corretto.aws/corretto.key | sudo apt-key add - && \
-  add-apt-repository 'deb https://apt.corretto.aws stable main'
-
-RUN apt-get update; apt-get install -y java-17-amazon-corretto-jdk
-
+RUN microdnf update && microdnf install -y java-17-amazon-corretto-devel
