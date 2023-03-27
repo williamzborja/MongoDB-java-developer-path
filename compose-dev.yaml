@@ -5,8 +5,8 @@ services:
     - infinity
     build: . 
     init: true
+    network_mode: host
     volumes:
     - type: bind
       source: /var/run/docker.sock
       target: /var/run/docker.sock
-
